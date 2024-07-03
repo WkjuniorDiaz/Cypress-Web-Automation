@@ -7,7 +7,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 6000,
 
   env:{
-    url : "https://rahulshettyacademy.com"
+    url : "https://www.saucedemo.com/"
   },
   retries:{
     runMode: 1,

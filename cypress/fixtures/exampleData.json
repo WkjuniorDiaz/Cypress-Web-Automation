@@ -1,8 +1,8 @@
 {
-  "name" : "Manuel",
-  "email" : "Manueltest@gmail.com",
-  "password" : "1234",
-  "gender" : "Female",
-  "productName": ["Nokia Edge","Blackberry"],
-  "country" : "India"
+  "validUsername" : "standard_user",
+  "lockedOutUser" : "locked_out_user",
+  "problemUser" : "problem_user",
+  "password" : "secret_sauce",
+  "wrongPassword" : "123456",
+  "productName": ["Nokia Edge","Blackberry"]
 }
