@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import DashboardPage from "../../../pages/DashboardPage"
-import LoginPage from "../../../pages/LoginPage"
+import DashboardPage from "../../pages/DashboardPage"
+import LoginPage from "../../pages/LoginPage"
 
 const loginPage = new LoginPage()
 const dashboardPage = new DashboardPage()
