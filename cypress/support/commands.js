@@ -12,10 +12,6 @@
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 //
-Cypress.Commands.add('selectProduct', (productName) => 
-{
-    cy.get('h4.card-title').contains(new RegExp('^' + productName + '$')).parents('.card.h-100').children('div.card-footer').children('.btn.btn-info').click()
-})
 
 
 
