@@ -1,0 +1,8 @@
+{
+  "validUsername" : "standard_user",
+  "lockedOutUser" : "locked_out_user",
+  "problemUser" : "problem_user",
+  "password" : "secret_sauce",
+  "wrongPassword" : "123456",
+  "productName": ["Nokia Edge","Blackberry"]
+}
