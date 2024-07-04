@@ -11,7 +11,10 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
-//
+    Cypress.Commands.add('selectProduct', (productName) => 
+    {
+        cy.contains(new RegExp('^' + productName + '$')).parents('.inventory_item_description').find('button').click()
+    })
 
 
 

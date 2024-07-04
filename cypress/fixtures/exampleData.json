@@ -3,5 +3,6 @@
   "lockedOutUser" : "locked_out_user",
   "problemUser" : "problem_user",
   "password" : "secret_sauce",
-  "wrongPassword" : "123456"
+  "wrongPassword" : "123456",
+  "productName": ["Sauce Labs Backpack","Sauce Labs Bike Light","Sauce Labs Onesie"]
 }

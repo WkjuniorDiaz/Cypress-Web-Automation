@@ -16,7 +16,7 @@ describe('Login Test Suite', () => {
     })
 
     beforeEach(() => {
-        // runs before each test in the block
+        cy.visit(Cypress.env('url'))
     })
 
     afterEach(() => {
@@ -31,8 +31,6 @@ describe('Login Test Suite', () => {
 
     it('Should login with valid credentials', () => {
         
-        cy.visit(Cypress.env('url'))
-
         cy.get('@data').then((data) => {
             loginPage.login(data.validUsername,data.password)
         })
@@ -42,8 +40,6 @@ describe('Login Test Suite', () => {
 
     it('Should show locked out message with locked out user credentials', () => {
         
-        cy.visit(Cypress.env('url'))
-
         cy.get('@data').then((data) => {
             loginPage.login(data.lockedOutUser,data.password)
         })
@@ -54,8 +50,6 @@ describe('Login Test Suite', () => {
 
     it('Should login with problem user credentials and show wrong images for products', () => {
         
-        cy.visit(Cypress.env('url'))
-
         cy.get('@data').then((data) => {
             loginPage.login(data.problemUser,data.password)
         })
@@ -68,8 +62,6 @@ describe('Login Test Suite', () => {
 
     it('Should show not match message with correct user and wrong password', () => {
         
-        cy.visit(Cypress.env('url'))
-
         cy.get('@data').then((data) => {
             loginPage.login(data.validUsername,data.wrongPassword)
         })
