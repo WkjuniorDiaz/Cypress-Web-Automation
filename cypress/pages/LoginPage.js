@@ -2,13 +2,15 @@
 
 class LoginPage{
 
-    getUsernameTextField(){ return cy.get('#user-name')}
+    getLoginTitle(){ return cy.get('#logInModalLabel')}
 
-    getPasswordTextField(){ return cy.get('#password')}
+    getUsernameTextField(){ return cy.get('#loginusername')}
 
-    getLoginBtn(){ return cy.get('#login-button')}
+    getPasswordTextField(){ return cy.get('#loginpassword')}
 
-    getErrorMessage(){ return cy.get('h3[data-test="error"]')}
+    getLoginBtn(){ return cy.get('.btn.btn-primary').contains('Log in')}
+
+    getCloseBtn(){ return cy.get('.btn.btn-secondary').contains('Close')}
 
 
     login(username,password){

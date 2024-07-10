@@ -1,8 +1,9 @@
 {
-  "validUsername" : "standard_user",
-  "lockedOutUser" : "locked_out_user",
+  "correctUsername" : "okJBtest30",
+  "menuOption": "Tenniscore",
+  "wrongUser" : "locked_out_user",
   "problemUser" : "problem_user",
-  "password" : "secret_sauce",
+  "password" : "okJBtest30",
   "wrongPassword" : "123456",
-  "productName": ["Sauce Labs Backpack","Sauce Labs Bike Light","Sauce Labs Onesie"]
+  "productName": "Samsung galaxy s6"
 }

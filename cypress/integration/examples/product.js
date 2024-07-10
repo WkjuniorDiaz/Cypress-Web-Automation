@@ -1,26 +1,37 @@
 /// <reference types="cypress" />
 
 import LoginPage from "../../pages/LoginPage"
+import ProductDetailPage from "../../pages/ProductDetailPage"
 import ProductPage from "../../pages/ProductPage"
 
 const loginPage = new LoginPage()
 const productPage = new ProductPage()
+const productDetailPage = new ProductDetailPage()
 
 describe('Swag Labs Product test suite', () => {
 
 before(() => {
     // runs once before all tests in the block
-    cy.fixture('exampleData').then( (Jdata) => {
-        cy.wrap(Jdata).as('data')
-    })
 })
 
 beforeEach(() => {
     // runs before each test in the block
     cy.visit(Cypress.env('url'))
-    cy.get('@data').then((data) => {
-        loginPage.login(data.validUsername,data.password)
+
+    cy.fixture('exampleData').then( (Jdata) => {
+        cy.wrap(Jdata).as('data')
     })
+
+    productPage.selectLoginOpt()
+    cy.wait(2000)
+       
+    cy.get('@data').then((data) => {
+        loginPage.login(data.correctUsername,data.password)
+
+        productPage.getWelcomeOpt().should('have.text','Welcome '+  data.correctUsername)
+    })
+
+    
 })
 
 afterEach(() => {
@@ -35,18 +46,17 @@ after(() => {
 
 it('should add a product to the cart', () => {
     cy.get('@data').then((data) => {
-        var productSelected = data.productName
 
-        productSelected.forEach(productName => {
-            cy.selectProduct(productName)
-        })
+        productPage.selectProduct(data.productName)
+
+        productDetailPage.selectAddToCart()
 
         productPage.selectCart()
 
-        productSelected.forEach(productName => {
-            cy.contains(new RegExp('^' + productName + '$')).should('exist')
-        })
+        cy.contains(data.productName).should('exist')
     })
+
+    
     
 })
 

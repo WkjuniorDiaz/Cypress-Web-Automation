@@ -13,7 +13,8 @@
 // Cypress.Commands.add('login', (email, password) => { ... })
     Cypress.Commands.add('selectProduct', (productName) => 
     {
-        cy.contains(new RegExp('^' + productName + '$')).parents('.inventory_item_description').find('button').click()
+        cy.get('h3[title="' + productName + '"]').parents()
+        cy.contains(new RegExp('^' + productName + '$')).parents('.js-merch-stash-check-listing').find('button').click()
     })
 
 
