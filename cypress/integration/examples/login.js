@@ -1,22 +1,23 @@
 /// <reference types="cypress" />
 
-import DashboardPage from "../../pages/DashboardPage"
+import ProductPage from "../../pages/ProductPage"
 import LoginPage from "../../pages/LoginPage"
 
 const loginPage = new LoginPage()
-const dashboardPage = new DashboardPage()
+const productPage = new ProductPage()
 
 describe('Login Test Suite', () => {
 
     before(() => {
-        // runs once before all tests in the block
-        cy.fixture('exampleData').then( (Jdata) => {
-            cy.wrap(Jdata).as('data')
-        })
+        // runs once before all tests in the block       
     })
 
     beforeEach(() => {
-        // runs before each test in the block
+        cy.fixture('exampleData').then( (Jdata) => {
+            cy.wrap(Jdata).as('data')
+        })
+
+        cy.visit(Cypress.env('url'))
     })
 
     afterEach(() => {
@@ -30,52 +31,58 @@ describe('Login Test Suite', () => {
 
 
     it('Should login with valid credentials', () => {
+
+        productPage.selectLoginOpt()
+        cy.wait(2000)
+
         
-        cy.visit(Cypress.env('url'))
-
         cy.get('@data').then((data) => {
-            loginPage.login(data.validUsername,data.password)
-        })
+            loginPage.login(data.correctUsername,data.password)
 
-        dashboardPage.getTitle().should('have.text','Products')
+            productPage.getWelcomeOpt().should('have.text','Welcome '+  data.correctUsername)
+        })
     })
 
-    it('Should show locked out message with locked out user credentials', () => {
-        
-        cy.visit(Cypress.env('url'))
+    it('Should show wrong password message with wrong username and correct password', () => {
 
+        productPage.selectLoginOpt()
+        cy.wait(2000)
+        
         cy.get('@data').then((data) => {
-            loginPage.login(data.lockedOutUser,data.password)
+            loginPage.login(data.wrongUser,data.password)
         })
 
-        loginPage.getErrorMessage().should('have.text','Epic sadface: Sorry, this user has been locked out.')
-
+        cy.on('window:alert',(str) =>{
+            expect(str).to.equal('Wrong password.')
+        })
     })
 
-    it('Should login with problem user credentials and show wrong images for products', () => {
+    it('Should show wrong password message with correct username and wrong password', () => {
+
+        productPage.selectLoginOpt()
+        cy.wait(2000)
         
-        cy.visit(Cypress.env('url'))
-
         cy.get('@data').then((data) => {
-            loginPage.login(data.problemUser,data.password)
+            loginPage.login(data.correctUsername,data.wrongPassword)
         })
 
-        dashboardPage.getImgProducts().each((el,index,$list) => {
-            el.should('have.attr','src','/static/media/sl-404.168b1cce.jpg')
+        cy.on('window:alert',(str) =>{
+            expect(str).to.equal('Wrong password.')
         })
-
     })
 
-    it('Should show not match message with correct user and wrong password', () => {
-        
-        cy.visit(Cypress.env('url'))
+    it('Should show wrong password message with correct wrong and wrong password', () => {
 
+        productPage.selectLoginOpt()
+        cy.wait(2000)
+        
         cy.get('@data').then((data) => {
-            loginPage.login(data.validUsername,data.wrongPassword)
+            loginPage.login(data.wrongUser,data.wrongPassword)
         })
 
-
-        loginPage.getErrorMessage().should('have.text','Epic sadface: Username and password do not match any user in this service')
+        cy.on('window:alert',(str) =>{
+            expect(str).to.equal('Wrong password.')
+        })
     })
 
 

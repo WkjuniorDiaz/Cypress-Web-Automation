@@ -11,7 +11,11 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
-//
+    Cypress.Commands.add('selectProduct', (productName) => 
+    {
+        cy.get('h3[title="' + productName + '"]').parents()
+        cy.contains(new RegExp('^' + productName + '$')).parents('.js-merch-stash-check-listing').find('button').click()
+    })
 
 
 
