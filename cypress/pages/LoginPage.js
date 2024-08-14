@@ -8,9 +8,9 @@ class LoginPage{
 
     getPasswordTextField(){ return cy.get('#loginpassword')}
 
-    getLoginBtn(){ return cy.get('.btn.btn-primary').contains('Log in')}
+    getLoginBtn(){ return cy.get('#logInModal .btn-primary')}
 
-    getCloseBtn(){ return cy.get('.btn.btn-secondary').contains('Close')}
+    getCloseBtn(){ return cy.get('#logInModal .btn-secondary')}
 
 
     login(username,password){

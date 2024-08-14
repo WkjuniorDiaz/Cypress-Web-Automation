@@ -5,5 +5,11 @@
   "problemUser" : "problem_user",
   "password" : "okJBtest30",
   "wrongPassword" : "123456",
-  "productName": "Samsung galaxy s6"
+  "productName": "Samsung galaxy s6",
+  "name": "Jose",
+  "country": "Peru",
+  "city": "Lima",
+  "card":"1234567890123456",
+  "month": "12",
+  "year":"2025"
 }
