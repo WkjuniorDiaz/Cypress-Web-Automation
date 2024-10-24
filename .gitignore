@@ -28,3 +28,6 @@ cypress/videos/*
 
 # Node.js 
 node_modules/
+
+#screenshots
+screenshots

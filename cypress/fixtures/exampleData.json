@@ -11,5 +11,6 @@
   "city": "Lima",
   "card":"1234567890123456",
   "month": "12",
-  "year":"2025"
+  "year":"2025",
+  "searchOpt":"Pizza hut"
 }

@@ -7,7 +7,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 6000,
 
   env:{
-    url : "https://www.demoblaze.com/index.html"
+    url : "https://www.pedidosya.com.pe/"
   },
   retries:{
     runMode: 1,
