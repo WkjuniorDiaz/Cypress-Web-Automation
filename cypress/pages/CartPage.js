@@ -25,22 +25,5 @@ class CartPage{
 
 
 
-    selectPlaceHolder(){
-        this.getplaceHolderbtn().click()
-    }
-
-    fillInformation(name,country,city,card,month,year){
-        this.getnameField().type(name)
-        this.getcountryField().type(country)
-        this.getcityField().type(city)
-        this.getcreditCardField().type(card)
-        this.getmonthField().type(month)
-        this.getyearField().type(year)
-    }
-
-    selectPurchaseBtn(){
-        this.getpurchaseBtn().click()
-    }
-
 }
 export default CartPage;

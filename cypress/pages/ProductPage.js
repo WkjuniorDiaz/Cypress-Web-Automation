@@ -11,17 +11,5 @@ class ProductPage{
 
     getCart(){ return cy.get('#cartur')}
 
-    selectLoginOpt(){
-        this.getLoginOpt().click()
-    }
-    
-    selectCart(){
-        this.getCart().click()
-    }
-
-    selectProduct(productName){
-        cy.contains(new RegExp('^' + productName + '$')).click()
-    }
-
 }
 export default ProductPage;

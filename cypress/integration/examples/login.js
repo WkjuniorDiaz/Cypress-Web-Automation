@@ -1,10 +1,14 @@
 /// <reference types="cypress" />
 
-import ProductPage from "../../pages/ProductPage"
-import LoginPage from "../../pages/LoginPage"
+import LoginActions from "../../actions/LoginActions"
+import ProductActions from "../../actions/ProductActions"
+import ProductAssertions from "../../assertions/ProductAssertions"
+import LoginAssertions from "../../assertions/LoginAssertions"
 
-const loginPage = new LoginPage()
-const productPage = new ProductPage()
+const loginActions = new LoginActions()
+const productActions = new ProductActions()
+const productAssertion = new ProductAssertions()
+const loginAssertion = new LoginAssertions()
 
 describe('Login Test Suite', () => {
 
@@ -32,57 +36,51 @@ describe('Login Test Suite', () => {
 
     it('Should login with valid credentials', () => {
 
-        productPage.selectLoginOpt()
+        productActions.selectLoginOpt()
         cy.wait(2000)
 
         
         cy.get('@data').then((data) => {
-            loginPage.login(data.correctUsername,data.password)
+            loginActions.login(data.correctUsername,data.password)
 
-            productPage.getWelcomeOpt().should('have.text','Welcome '+  data.correctUsername)
+            productAssertion.verifyWelcomeMessage(data.correctUsername)
         })
     })
 
     it('Should show wrong password message with wrong username and correct password', () => {
 
-        productPage.selectLoginOpt()
+        productActions.selectLoginOpt()
         cy.wait(2000)
         
         cy.get('@data').then((data) => {
-            loginPage.login(data.wrongUser,data.password)
+            loginActions.login(data.wrongUser,data.password)
         })
 
-        cy.on('window:alert',(str) =>{
-            expect(str).to.equal('Wrong password.')
-        })
+        loginAssertion.verifyErrorMessage()
     })
 
     it('Should show wrong password message with correct username and wrong password', () => {
 
-        productPage.selectLoginOpt()
+        productActions.selectLoginOpt()
         cy.wait(2000)
         
         cy.get('@data').then((data) => {
-            loginPage.login(data.correctUsername,data.wrongPassword)
+            loginActions.login(data.correctUsername,data.wrongPassword)
         })
 
-        cy.on('window:alert',(str) =>{
-            expect(str).to.equal('Wrong password.')
-        })
+        loginAssertion.verifyErrorMessage()
     })
 
     it('Should show wrong password message with correct wrong and wrong password', () => {
 
-        productPage.selectLoginOpt()
+        productActions.selectLoginOpt()
         cy.wait(2000)
         
         cy.get('@data').then((data) => {
-            loginPage.login(data.wrongUser,data.wrongPassword)
+            loginActions.login(data.wrongUser,data.wrongPassword)
         })
 
-        cy.on('window:alert',(str) =>{
-            expect(str).to.equal('Wrong password.')
-        })
+        loginAssertion.verifyErrorMessage()
     })
 
 

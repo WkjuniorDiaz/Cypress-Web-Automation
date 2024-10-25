@@ -1,14 +1,18 @@
 /// <reference types="cypress" />
 
-import CartPage from "../../pages/CartPage"
-import LoginPage from "../../pages/LoginPage"
-import ProductDetailPage from "../../pages/ProductDetailPage"
-import ProductPage from "../../pages/ProductPage"
+import CartActions from "../../actions/CartActions"
+import LoginActions from "../../actions/LoginActions"
+import ProductActions from "../../actions/ProductActions"
+import ProductDetailActions from "../../actions/ProductDetailActions"
+import CartAssertions from "../../assertions/CartAssertions"
+import ProductAssertions from "../../assertions/ProductAssertions"
 
-const loginPage = new LoginPage()
-const productPage = new ProductPage()
-const productDetailPage = new ProductDetailPage()
-const cartPage = new CartPage()
+const loginActions = new LoginActions()
+const productActions = new ProductActions()
+const cartActions = new CartActions()
+const productDetailActions = new ProductDetailActions()
+const cartAssertion = new CartAssertions()
+const productAssertion = new ProductAssertions()
 
 describe('Swag Labs Product test suite', () => {
 
@@ -24,11 +28,11 @@ beforeEach(() => {
         cy.wrap(Jdata).as('data')
     })
 
-    productPage.selectLoginOpt()
+    productActions.selectLoginOpt()
     cy.wait(2000)
        
     cy.get('@data').then((data) => {
-        loginPage.login(data.correctUsername,data.password)
+        loginActions.login(data.correctUsername,data.password)
     })
 
     
@@ -47,47 +51,44 @@ after(() => {
 it('should add a product to the cart', () => {
     cy.get('@data').then((data) => {
 
-        productPage.selectProduct(data.productName)
+        productActions.selectProduct(data.productName)
 
-        productDetailPage.selectAddToCart()
+        productDetailActions.selectAddToCart()
     })
 
-    cy.on('window:alert',(str) => {
-        expect(str).to.equal('Product added.')
-    })
+    productAssertion.verifyProductAdditionMessage()
 })
 
 it('should view the cart and proceed to checkout', () => {
     cy.get('@data').then((data) => {
-        productPage.selectProduct(data.productName)
+        productActions.selectProduct(data.productName)
 
-        productDetailPage.selectAddToCart()
+        productDetailActions.selectAddToCart()
 
-        productPage.selectCart()
+        productActions.selectCart()
 
-        cy.contains(data.productName).should('exist')
+        cartAssertion.verifyProductExistInOrder(data.productName)
 
-        cartPage.selectPlaceHolder()
+        cartActions.selectPlaceHolder()
     })
 })
 
 it('should complete the purchase', () => {
     cy.get('@data').then((data) => {
-        productPage.selectProduct(data.productName)
+        productActions.selectProduct(data.productName)
 
-        productDetailPage.selectAddToCart()
+        productDetailActions.selectAddToCart()
 
-        productPage.selectCart()
+        productActions.selectCart()
         
-        cartPage.selectPlaceHolder()
+        cartActions.selectPlaceHolder()
 
-        cartPage.fillInformation(data.name,data.country,data.city,data.card,data.month,data.year)
+        cartActions.fillInformation(data.name,data.country,data.city,data.card,data.month,data.year)
 
-        cartPage.selectPurchaseBtn()
+        cartActions.selectPurchaseBtn()
 
-        cartPage.getalertInfo().should('be.visible')
+        cartAssertion.verifyVoucherMessage()
 
-        cartPage.getalertInfo().should('contain.text','Thank you for your purchase!')
     })
 })
 

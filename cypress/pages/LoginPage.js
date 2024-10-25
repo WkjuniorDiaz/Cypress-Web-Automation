@@ -13,13 +13,5 @@ class LoginPage{
     getCloseBtn(){ return cy.get('#logInModal .btn-secondary')}
 
 
-    login(username,password){
-        this.getUsernameTextField().type(username)
-        this.getPasswordTextField().type(password)
-        this.getLoginBtn().click()
-    }
-
-
-
 }
 export default LoginPage;
