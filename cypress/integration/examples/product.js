@@ -20,7 +20,7 @@ beforeEach(() => {
     // runs before each test in the block
     cy.visit(Cypress.env('url'))
 
-    cy.fixture('exampleData').then( (Jdata) => {
+    cy.fixture('testCaseData').then( (Jdata) => {
         cy.wrap(Jdata).as('data')
     })
 
