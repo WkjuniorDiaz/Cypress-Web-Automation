@@ -13,7 +13,7 @@ describe('Login Test Suite', () => {
     })
 
     beforeEach(() => {
-        cy.fixture('exampleData').then( (Jdata) => {
+        cy.fixture('testCaseData').then( (Jdata) => {
             cy.wrap(Jdata).as('data')
         })
 
